@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>561</height>
+    <width>793</width>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>80</y>
-      <width>741</width>
-      <height>451</height>
+      <x>10</x>
+      <y>180</y>
+      <width>771</width>
+      <height>471</height>
      </rect>
     </property>
    </widget>
@@ -52,6 +52,7 @@
       <property name="font">
        <font>
         <family>Arial</family>
+        <pointsize>9</pointsize>
        </font>
       </property>
       <property name="text">
@@ -95,30 +96,72 @@
 with null values</string>
     </property>
    </widget>
-   <widget class="QSplitter" name="splitter">
+   <widget class="QWidget" name="wColFilter" native="true">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>10</y>
+      <width>311</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="lblColFil">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Columns Filter:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="w1" native="true">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>93</width>
-      <height>56</height>
+      <width>120</width>
+      <height>80</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-    <widget class="QPushButton" name="btnData">
-     <property name="text">
-      <string>Import Data</string>
+    <widget class="QSplitter" name="splitter">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>93</width>
+       <height>56</height>
+      </rect>
      </property>
-    </widget>
-    <widget class="QPushButton" name="btnTrain">
-     <property name="enabled">
-      <bool>false</bool>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="text">
-      <string>Train</string>
-     </property>
+     <widget class="QPushButton" name="btnData">
+      <property name="text">
+       <string>Import Data</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnTrain">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Train</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

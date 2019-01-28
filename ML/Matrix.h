@@ -25,6 +25,8 @@ class Matrix{
         Matrix(const vector<vector<double>>& mat); //constructor 2
         Matrix(const vector<double>& mat); //constructor 3
         Matrix(const Matrix& mat); //constructor 4
+
+
         void init_mat(int dimR, int dimC); //initialize a matrix
         int getDimR() const;
         int getDimC() const;

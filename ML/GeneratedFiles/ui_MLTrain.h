@@ -136,7 +136,7 @@ public:
 
         lblMssg = new QLabel(Dialog);
         lblMssg->setObjectName(QString::fromUtf8("lblMssg"));
-        lblMssg->setGeometry(QRect(320, 30, 311, 141));
+        lblMssg->setGeometry(QRect(320, 30, 471, 151));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Arial"));
         font1.setPointSize(11);
@@ -186,6 +186,7 @@ public:
         splitter_3->addWidget(cbPreds);
         dsbPreds = new QDoubleSpinBox(splitter_3);
         dsbPreds->setObjectName(QString::fromUtf8("dsbPreds"));
+        dsbPreds->setMaximum(10000.000000000000000);
         splitter_3->addWidget(dsbPreds);
         splitter_4->addWidget(splitter_3);
         splitter_5 = new QSplitter(frame);

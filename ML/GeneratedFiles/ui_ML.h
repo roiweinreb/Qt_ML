@@ -34,6 +34,9 @@ public:
     QLabel *lblMerge;
     QComboBox *cbCommon;
     QCheckBox *cbxFilter;
+    QWidget *wColFilter;
+    QLabel *lblColFil;
+    QWidget *w1;
     QSplitter *splitter;
     QPushButton *btnData;
     QPushButton *btnTrain;
@@ -43,13 +46,13 @@ public:
     {
         if (MLClass->objectName().isEmpty())
             MLClass->setObjectName(QString::fromUtf8("MLClass"));
-        MLClass->resize(780, 561);
+        MLClass->resize(793, 673);
         centralWidget = new QWidget(MLClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tblData = new QTableWidget(centralWidget);
         tblData->setObjectName(QString::fromUtf8("tblData"));
         tblData->setEnabled(false);
-        tblData->setGeometry(QRect(20, 80, 741, 451));
+        tblData->setGeometry(QRect(10, 180, 771, 471));
         wChoose = new QWidget(centralWidget);
         wChoose->setObjectName(QString::fromUtf8("wChoose"));
         wChoose->setGeometry(QRect(160, 0, 161, 66));
@@ -61,6 +64,7 @@ public:
         lblMerge->setObjectName(QString::fromUtf8("lblMerge"));
         QFont font;
         font.setFamily(QString::fromUtf8("Arial"));
+        font.setPointSize(9);
         lblMerge->setFont(font);
         splitter_2->addWidget(lblMerge);
         cbCommon = new QComboBox(splitter_2);
@@ -79,9 +83,23 @@ public:
         QFont font1;
         font1.setPointSize(9);
         cbxFilter->setFont(font1);
-        splitter = new QSplitter(centralWidget);
+        wColFilter = new QWidget(centralWidget);
+        wColFilter->setObjectName(QString::fromUtf8("wColFilter"));
+        wColFilter->setGeometry(QRect(330, 10, 311, 151));
+        lblColFil = new QLabel(wColFilter);
+        lblColFil->setObjectName(QString::fromUtf8("lblColFil"));
+        lblColFil->setGeometry(QRect(0, 0, 111, 21));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Arial"));
+        font2.setPointSize(10);
+        lblColFil->setFont(font2);
+        lblColFil->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        w1 = new QWidget(centralWidget);
+        w1->setObjectName(QString::fromUtf8("w1"));
+        w1->setGeometry(QRect(20, 10, 120, 80));
+        splitter = new QSplitter(w1);
         splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setGeometry(QRect(20, 10, 93, 56));
+        splitter->setGeometry(QRect(10, 10, 93, 56));
         splitter->setOrientation(Qt::Vertical);
         btnData = new QPushButton(splitter);
         btnData->setObjectName(QString::fromUtf8("btnData"));
@@ -108,6 +126,7 @@ public:
 
         cbxFilter->setText(QApplication::translate("MLClass", "Filter rows\n"
 "with null values", nullptr));
+        lblColFil->setText(QApplication::translate("MLClass", "Columns Filter:", nullptr));
         btnData->setText(QApplication::translate("MLClass", "Import Data", nullptr));
         btnTrain->setText(QApplication::translate("MLClass", "Train", nullptr));
     } // retranslateUi

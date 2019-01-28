@@ -1,6 +1,6 @@
 #include "Table.h"
 
-
+//CONSTRUCTORS
 
 Table::Table()
 {
@@ -24,11 +24,13 @@ Table::Table(vector<vector<string>> values, vector<string> col_names) {
 	this->col_names = col_names;
 }
 
+//DESTRUCTOR
 
 Table::~Table()
 {
 }
 
+//METHODS
 
 Table Table::fetch_table(string filepath) {
 	vector<vector<string>> table;
@@ -41,7 +43,7 @@ Table Table::fetch_table(string filepath) {
 		while (getline(myfile, line))
 		{
 			vector<string> values = Helper::split(line, ','); //extract values
-
+			
 			if(counter == 0) //store headers
 				names = values;
 			else  //store data
@@ -63,7 +65,6 @@ vector<Table> Table::fetch_tables(vector<string> paths) {
 	}
 	return tables;
 }
-
 
 Table& Table::append_row(vector<string> new_data) {
 	if (new_data.size() != this->dimC) { //check dimensions
@@ -233,8 +234,6 @@ void Table::append_row(vector<string> new_data, vector<string> data_headers) {
 
 }
 
-
-
 void Table::print_table() {
 	Helper::print_vec(this->col_names);
 	cout << this->dimR << " X " << this->dimC << endl;
@@ -292,19 +291,19 @@ vector<string> Table::getColumn(string colName) {
 
 //GETTERS
 
-int Table::getDimR() {
+int Table::getDimR() const{
 	return this->dimR;
 }
 
-int Table::getDimC() {
+int Table::getDimC() const{
 	return this->dimC;
 }
 
-vector<vector<string>> Table::getValues() {
+vector<vector<string>> Table::getValues() const{
 	return this->values;
 }
 
-vector<string> Table::getColNames() {
+vector<string> Table::getColNames() const {
 	return this->col_names;
 }
 
@@ -320,55 +319,3 @@ Table& Table::operator= (Table& table)
 
 	return *this;
 }
-
-//Table Table::normalize(int axis) {
-//	vector<vector<double>> dbl_mat = Helper::str2dbl(this->getValues()); //convert to double
-//	if (axis == 0) { //rows normalization
-//		vector<double> mean(this->dimR);
-//		vector<double> range(this->dimR);
-//		vector<vector<double>> mat(this->dimR, vector<double>(this->dimC));
-//		for (int i = 0; i < mat.size(); i++) {
-//			mean[i] = accumulate(dbl_mat[i].begin(), dbl_mat[i].end(), 0.0) / this->dimC; //calculate mean
-//			range[i] = *max_element(dbl_mat[i].begin(), dbl_mat[i].end()) -
-//				*min_element(dbl_mat[i].begin(), dbl_mat[i].end()); //calculate range
-//			for (int j = 0; j < mat[0].size(); j++) {
-//				mat[i][j] = (dbl_mat[i][j] - mean[i]) / range[i]; //normalize elements
-//			}
-//		}
-//		this->meanR = mean;
-//		this->rangeR = range;
-//		//this->mat = mat;
-//	}
-//
-//	if (axis == 1) { //columns normalization
-//		vector<double> mean(this->dimC);
-//		vector<double> range(this->dimC);
-//		vector<vector<double>> trans = this->transpose().mat;
-//		for (int i = 0; i < trans.size(); i++) {
-//			mean[i] = accumulate(trans[i].begin(), trans[i].end(), 0.0) / this->dimR; //calculate mean
-//			range[i] = *max_element(trans[i].begin(), trans[i].end()) -
-//				*min_element(trans[i].begin(), trans[i].end()); //calculate range
-//			for (int j = 0; j < trans[0].size(); j++) {
-//				trans[i][j] = (trans[i][j] - mean[i]) / range[i]; //normalize elements
-//			}
-//		}
-//		this->meanC = mean;
-//		this->rangeC = range;
-//		this->mat = Matrix(trans).transpose().getMat();
-//	}
-//
-//}
-//
-//Table& Table::transpose() {
-//	vector<vector<double>> mat_trans;
-//	vector<double> vec;
-//	for (int i = 0; i < dimC; i++) {
-//		for (int j = 0; j < dimR; j++) {
-//			vec.push_back(values[j][i]);
-//		}
-//		mat_trans.push_back(vec);
-//		vec.clear();
-//	}
-//	this->values = Helper::dbl2str()
-//	return Matrix(mat_trans);
-//}

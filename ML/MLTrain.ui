@@ -195,8 +195,8 @@
     <rect>
      <x>320</x>
      <y>30</y>
-     <width>311</width>
-     <height>141</height>
+     <width>471</width>
+     <height>151</height>
     </rect>
    </property>
    <property name="font">
@@ -294,7 +294,11 @@
        <enum>Qt::Vertical</enum>
       </property>
       <widget class="QComboBox" name="cbPreds"/>
-      <widget class="QDoubleSpinBox" name="dsbPreds"/>
+      <widget class="QDoubleSpinBox" name="dsbPreds">
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QSplitter" name="splitter_5">

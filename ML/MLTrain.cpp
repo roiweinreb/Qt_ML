@@ -54,8 +54,8 @@ void MLTrain::showLinePlot() {
 	chart->addSeries(series);
 	chart->createDefaultAxes();
 	chart->setDropShadowEnabled(false);
-	chart->axisX()->setRange(-10, lr.costValues.size()+10);
-	chart->axisY()->setRange(-10, lr.costValues[0]+10);
+	chart->axisX()->setRange(0, lr.costValues.size());
+	chart->axisY()->setRange(0, lr.costValues[0]);
 	chart->legend()->setVisible(false);
 	chart->setTitle("Cost (MSE) vs # Iterations");
 	chart->axisX()->setTitleText("Iteration");
@@ -88,21 +88,22 @@ void MLTrain::showThetaValues() {
 	//QMessageBox::warning(this, "eee", QString("%1 , %2").arg(preds[0].c_str()).arg(preds[1].c_str()));
 	QString theta;
 	QString predictor;
-	theta = QString::number(lr.theta.getMat()[0][0]);
+	theta = QString::number(round(lr.theta.getMat()[0][0] * 100) / 100);
 	str.append(theta);
-	str.append(" + ");
 	for (int i = 0; i < preds.size(); i++) {
-		theta = QString::number(lr.theta.getMat()[0][i+1]);
+		theta = QString::number(round(lr.theta.getMat()[0][i+1]*100) / 100);
 		predictor = preds[i].c_str();
 		//QMessageBox::warning(this, "eee", QString("%1").arg(preds[i].c_str()));
+		if (i != 0 && i % 2 == 0)
+			str.append("\n");
+		str.append(" + ");
 		str.append(theta);
-		str.append(predictor);
+		str.append("[" + predictor + "]");
 		if (i == preds.size()-1)
 			continue;
-		str.append(" + ");
 	}
 	//QMessageBox::warning(this, "eee", QString("%1 %2").arg(lr.data_trans.getMeanC()[0]).arg(lr.data_trans.getMeanC()[1]));
-	ui.lblMssg->setText(QString("Trained successfully!\ncost: %1 \n%2").arg(lr.costValues.back()).arg(str));
+	ui.lblMssg->setText(QString("Trained successfully!\ncost: %1 \n%2\nR^2 = %3").arg(lr.costValues.back()).arg(str).arg(lr.get_r_squared()));
 	ui.lblMssg->show();
 }
 

@@ -21,8 +21,6 @@ public:
 	Table remove_column(string colName);
 	vector<string> getColumn(int index);
 	vector<string> getColumn(string colName);
-	Table normalize(int axis); //0-rows, 1-columns
-	Table& transpose();
 	bool hasNull();
 	Table& operator=(Table& table); //assign operator
 	static Table merge_tables(Table table1, Table table2);
@@ -32,19 +30,15 @@ public:
 	static vector<Table> fetch_tables(vector<string> paths);
 
 	//Getters
-	int getDimR();
-	int getDimC();
-	vector<vector<string>> getValues();
-	vector<string> getColNames();
+	int getDimR() const;
+	int getDimC() const;
+	vector<vector<string>> getValues() const;
+	vector<string> getColNames() const;
 
 private:
 	int dimR;
 	int dimC;
 	vector<vector<string>> values;
 	vector<string> col_names;
-	vector<double> meanR;
-	vector<double> meanC;
-	vector<double> rangeR;
-	vector<double> rangeC;
 };
 

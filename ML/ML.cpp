@@ -7,6 +7,19 @@ ML::ML(QWidget *parent)
 	setWindowTitle("Linear Regression Machine");
 	ui.wChoose->hide();
 	ui.tblData->setDisabled(true);
+	ui.wColFilter->hide();
+
+
+
+	/*QGridLayout *grid = new QGridLayout;
+	grid->addWidget(createFirstExclusiveGroup(), 0, 0);
+	grid->addWidget(createSecondExclusiveGroup(), 1, 0);
+	grid->addWidget(createNonExclusiveGroup(), 0, 1);
+	grid->addWidget(createPushButtonGroup(), 1, 1);
+	setLayout(grid);
+
+	setWindowTitle(tr("Group Boxes"));
+	resize(480, 320);*/
 }
 
 void ML::fetchTablesData(QStringList filePaths) {
@@ -39,6 +52,7 @@ void ML::fetchTablesData(QStringList filePaths) {
 		this->displayedTable = this->table;
 		enableTable();
 	}
+	enableColFilter(); //show the column filter feature
 
 }
 
@@ -55,6 +69,26 @@ void ML::displayOnTableWidget(Table tab) {
 
 Table ML::fetchTableData(QString filePath) {
 	return Table::fetch_table(filePath.toStdString()); 
+}
+
+void ML::enableColFilter() { //DISPLAY COLUMN FILTER WIDGET
+	//int col_num = this->table.getDimC(); //get number of columns
+	//vector<string> col_names = this->table.getColNames(); //get names of columns
+	//int rowIdx = -1;
+	//for (int i = 0; i < col_num; i++) {
+	//	QString name = col_names[i].c_str();
+	//	QCheckBox *cb = new QCheckBox;
+	//	//QMessageBox::warning(this, tr("Warning"), tr("%1").arg(col_names[i].c_str()));
+	//	if (i % 3 == 0) {
+	//		rowIdx++;
+	//		QHBoxLayout *hbox = new QHBoxLayout;
+	//	}
+	//	cb->setText(name);
+	//	cb->setFixedWidth(23 + (name.size() * 6.5));
+	//	ui.lyoutCbx->addWidget(cb, rowIdx, (i % 3));
+	//	//i++;
+	//}
+	//ui.wColFilter->show();
 }
 
 QStringList ML::stdToQStringList(vector<string> vec) {
@@ -75,7 +109,7 @@ void ML::updateTableHeaders(QStringList new_headers) {
 	ui.tblData->setHorizontalHeaderLabels(headers);
 }
 
-QStringList ML::getTableHeaders() {
+QStringList ML::getTableHeaders() { //GET TABLE HEADERS
 	QStringList headers;
 	for (int i = 0; i < ui.tblData->columnCount(); i++) {
 		headers.append(ui.tblData->horizontalHeaderItem(i)->text());
@@ -83,7 +117,7 @@ QStringList ML::getTableHeaders() {
 	return headers;
 }
 
-void ML::setResponseOptions(MLTrain& mltrain) {
+void ML::setResponseOptions(MLTrain& mltrain) { //PASS PARAMETERS TO MLTRAIN CLASS
 	QString str;
 	for (int i = 0; i < ui.tblData->columnCount(); i++) {
 		str = QString::fromUtf8(this->table.getColNames()[i].c_str());
@@ -91,13 +125,13 @@ void ML::setResponseOptions(MLTrain& mltrain) {
 	}
 }
 
-void ML::disableTable() {
+void ML::disableTable() { //HIDE TABLE
 	ui.tblData->hide();
 	ui.cbxFilter->setDisabled(true);
 	ui.btnTrain->setDisabled(true);
 }
 
-void ML::enableTable() {
+void ML::enableTable() { //DISPLAY TABLE
 	ui.tblData->setEnabled(true);
 	displayOnTableWidget(this->displayedTable);
 	ui.tblData->show();
@@ -110,13 +144,15 @@ void ML::enableTable() {
 	}
 }
 
-Ui::MLClass ML::getUi() {
+//GETTERS
+
+Ui::MLClass ML::getUi() { 
 	return this->ui;
 }
 
 //SIGNALS
 
-void ML::on_btnData_clicked() {
+void ML::on_btnData_clicked() { //IMPORT DATA BUTTON
 	auto fileNames = QFileDialog::getOpenFileNames(this, "Select CSV file", QDir::rootPath(), "CSV File (*.csv)");
 	if (fileNames.isEmpty()) {
 		return;
@@ -124,7 +160,7 @@ void ML::on_btnData_clicked() {
 	fetchTablesData(fileNames);
 }
 
-void ML::on_cbCommon_currentTextChanged(QString str) {
+void ML::on_cbCommon_currentTextChanged(QString str) {   //CHOOSE COMMON COLUMN BUTTON
 	if (str == "--Not Selected--") {
 		disableTable();
 		return;
@@ -137,24 +173,9 @@ void ML::on_cbCommon_currentTextChanged(QString str) {
 	this->table = result;
 	this->displayedTable = this->table;
 	enableTable();
-
-	//if (!this->table.hasNull()) //if original table has nulls
-	//	ui.cbxFilter->setDisabled(true);
-	//else //if it doesn't
-	//	ui.cbxFilter->setEnabled(true);
-	
-
-	//if (!this->table.hasNull()) { //if the table doesn't have null values
-	//	ui.btnTrain->setEnabled(true);
-	//	ui.cbxFilter->setDisabled(true);
-	//}
-	//else { //if the table doesn't have null values
-	//	ui.btnTrain->setDisabled(true);
-	//	ui.cbxFilter->setEnabled(true);
-	//}
 }
 
-void ML::on_cbxFilter_stateChanged(int state) {
+void ML::on_cbxFilter_stateChanged(int state) { //FILTER NULL CHECKBOX
 	if (state) { //checked
 		this->displayedTable = this->table.filter_null();
 		enableTable();
@@ -166,9 +187,9 @@ void ML::on_cbxFilter_stateChanged(int state) {
 		ui.btnTrain->setDisabled(true);
 	}
 }
-void ML::on_btnTrain_clicked() {
+void ML::on_btnTrain_clicked() { //TRAIN BUTTON
 	MLTrain mltrain(this);
 	setResponseOptions(mltrain);
-	mltrain.setTable(this->table);
+	mltrain.setTable(this->displayedTable);
 	mltrain.exec();
 }

@@ -32,6 +32,7 @@ public:
 	void displayOnTableWidget(Table tab);
 	void disableTable();
 	void enableTable();
+	void enableColFilter();
 
 private:
 	Ui::MLClass ui;
