@@ -11,9 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -40,7 +42,6 @@ public:
     QComboBox *cbRate;
     QLabel *lblIter;
     QComboBox *cbIter;
-    QLabel *lblMssg;
     QWidget *wPredict;
     QFrame *frame;
     QSplitter *splitter_4;
@@ -53,22 +54,32 @@ public:
     QSplitter *splitter_5;
     QPushButton *btnSet;
     QPushButton *btnPredict;
+    QCheckBox *cbClamp;
+    QWidget *wMssg;
+    QLabel *lblMssg;
+    QWidget *wClamp;
+    QWidget *formLayoutWidget;
+    QFormLayout *formLayout;
+    QLabel *lblClampMin;
+    QLabel *lblClampMax;
+    QDoubleSpinBox *cbMin;
+    QDoubleSpinBox *cbMax;
 
     void setupUi(QDialog *Dialog)
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QString::fromUtf8("Dialog"));
-        Dialog->resize(1151, 704);
+        Dialog->resize(1193, 692);
         wScatter = new QWidget(Dialog);
         wScatter->setObjectName(QString::fromUtf8("wScatter"));
-        wScatter->setGeometry(QRect(50, 190, 1051, 481));
+        wScatter->setGeometry(QRect(10, 190, 1151, 481));
         btnCancel = new QPushButton(Dialog);
         btnCancel->setObjectName(QString::fromUtf8("btnCancel"));
         btnCancel->setGeometry(QRect(180, 70, 93, 22));
         btnOk = new QPushButton(Dialog);
         btnOk->setObjectName(QString::fromUtf8("btnOk"));
         btnOk->setEnabled(true);
-        btnOk->setGeometry(QRect(180, 42, 93, 22));
+        btnOk->setGeometry(QRect(180, 40, 93, 22));
         layoutWidget = new QWidget(Dialog);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
         layoutWidget->setGeometry(QRect(10, 10, 161, 161));
@@ -134,20 +145,9 @@ public:
 
         verticalLayout_3->addWidget(splitter);
 
-        lblMssg = new QLabel(Dialog);
-        lblMssg->setObjectName(QString::fromUtf8("lblMssg"));
-        lblMssg->setGeometry(QRect(320, 30, 471, 151));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Arial"));
-        font1.setPointSize(11);
-        font1.setBold(false);
-        font1.setWeight(50);
-        lblMssg->setFont(font1);
-        lblMssg->setFrameShape(QFrame::NoFrame);
-        lblMssg->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         wPredict = new QWidget(Dialog);
         wPredict->setObjectName(QString::fromUtf8("wPredict"));
-        wPredict->setGeometry(QRect(800, 30, 271, 161));
+        wPredict->setGeometry(QRect(890, 10, 271, 161));
         frame = new QFrame(wPredict);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setGeometry(QRect(10, 10, 260, 141));
@@ -156,7 +156,7 @@ public:
         frame->setLineWidth(6);
         splitter_4 = new QSplitter(frame);
         splitter_4->setObjectName(QString::fromUtf8("splitter_4"));
-        splitter_4->setGeometry(QRect(14, 10, 231, 51));
+        splitter_4->setGeometry(QRect(14, 10, 218, 51));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -168,14 +168,14 @@ public:
         splitter_2->setOrientation(Qt::Vertical);
         lblPred = new QLabel(splitter_2);
         lblPred->setObjectName(QString::fromUtf8("lblPred"));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("Arial"));
-        font2.setPointSize(10);
-        lblPred->setFont(font2);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Arial"));
+        font1.setPointSize(10);
+        lblPred->setFont(font1);
         splitter_2->addWidget(lblPred);
         lblPred_2 = new QLabel(splitter_2);
         lblPred_2->setObjectName(QString::fromUtf8("lblPred_2"));
-        lblPred_2->setFont(font2);
+        lblPred_2->setFont(font1);
         splitter_2->addWidget(lblPred_2);
         splitter_4->addWidget(splitter_2);
         splitter_3 = new QSplitter(splitter_4);
@@ -191,7 +191,7 @@ public:
         splitter_4->addWidget(splitter_3);
         splitter_5 = new QSplitter(frame);
         splitter_5->setObjectName(QString::fromUtf8("splitter_5"));
-        splitter_5->setGeometry(QRect(40, 90, 188, 28));
+        splitter_5->setGeometry(QRect(40, 100, 188, 28));
         splitter_5->setOrientation(Qt::Horizontal);
         btnSet = new QPushButton(splitter_5);
         btnSet->setObjectName(QString::fromUtf8("btnSet"));
@@ -200,6 +200,63 @@ public:
         btnPredict->setObjectName(QString::fromUtf8("btnPredict"));
         btnPredict->setEnabled(false);
         splitter_5->addWidget(btnPredict);
+        cbClamp = new QCheckBox(frame);
+        cbClamp->setObjectName(QString::fromUtf8("cbClamp"));
+        cbClamp->setGeometry(QRect(80, 70, 151, 28));
+        cbClamp->setLayoutDirection(Qt::RightToLeft);
+        wMssg = new QWidget(Dialog);
+        wMssg->setObjectName(QString::fromUtf8("wMssg"));
+        wMssg->setGeometry(QRect(290, 20, 581, 151));
+        lblMssg = new QLabel(wMssg);
+        lblMssg->setObjectName(QString::fromUtf8("lblMssg"));
+        lblMssg->setGeometry(QRect(0, 0, 571, 141));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Arial"));
+        font2.setPointSize(11);
+        font2.setBold(false);
+        font2.setWeight(50);
+        lblMssg->setFont(font2);
+        lblMssg->setFrameShape(QFrame::NoFrame);
+        lblMssg->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        wClamp = new QWidget(Dialog);
+        wClamp->setObjectName(QString::fromUtf8("wClamp"));
+        wClamp->setGeometry(QRect(970, 200, 191, 81));
+        formLayoutWidget = new QWidget(wClamp);
+        formLayoutWidget->setObjectName(QString::fromUtf8("formLayoutWidget"));
+        formLayoutWidget->setGeometry(QRect(30, 0, 161, 71));
+        formLayout = new QFormLayout(formLayoutWidget);
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
+        formLayout->setContentsMargins(0, 0, 0, 0);
+        lblClampMin = new QLabel(formLayoutWidget);
+        lblClampMin->setObjectName(QString::fromUtf8("lblClampMin"));
+        lblClampMin->setFont(font1);
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, lblClampMin);
+
+        lblClampMax = new QLabel(formLayoutWidget);
+        lblClampMax->setObjectName(QString::fromUtf8("lblClampMax"));
+        lblClampMax->setFont(font1);
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, lblClampMax);
+
+        cbMin = new QDoubleSpinBox(formLayoutWidget);
+        cbMin->setObjectName(QString::fromUtf8("cbMin"));
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, cbMin);
+
+        cbMax = new QDoubleSpinBox(formLayoutWidget);
+        cbMax->setObjectName(QString::fromUtf8("cbMax"));
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, cbMax);
+
+        wMssg->raise();
+        wScatter->raise();
+        btnCancel->raise();
+        btnOk->raise();
+        layoutWidget->raise();
+        wPredict->raise();
+        wClamp->raise();
 
         retranslateUi(Dialog);
 
@@ -226,11 +283,14 @@ public:
         cbIter->setItemText(3, QApplication::translate("Dialog", "1500", nullptr));
         cbIter->setItemText(4, QApplication::translate("Dialog", "1000", nullptr));
 
-        lblMssg->setText(QApplication::translate("Dialog", "TextLabel", nullptr));
         lblPred->setText(QApplication::translate("Dialog", "Select predictor", nullptr));
         lblPred_2->setText(QApplication::translate("Dialog", "Set value", nullptr));
         btnSet->setText(QApplication::translate("Dialog", "Set", nullptr));
         btnPredict->setText(QApplication::translate("Dialog", "Predict", nullptr));
+        cbClamp->setText(QApplication::translate("Dialog", "Clamp predictions", nullptr));
+        lblMssg->setText(QApplication::translate("Dialog", "Building a linear regression model...", nullptr));
+        lblClampMin->setText(QApplication::translate("Dialog", "Min:", nullptr));
+        lblClampMax->setText(QApplication::translate("Dialog", "Max:", nullptr));
     } // retranslateUi
 
 };

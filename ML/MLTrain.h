@@ -23,6 +23,7 @@ public:
 	void setTable(Table& table);
 	void showThetaValues();
 	void showPredict();
+	void train();
 
 	//int getResponseIdx();
 
@@ -37,6 +38,7 @@ private:
 	QMap<int, QDoubleSpinBox> dsbMap;
 	QMap<QString, QVariant> predVals;
 	vector<string> preds;
+	QChartView *chartView;
 
 private slots:
 	
@@ -44,6 +46,8 @@ private slots:
 	void on_btnCancel_clicked();
 	void on_btnPredict_clicked();
 	void on_btnSet_clicked();
+	void on_cbClamp_stateChanged(int state);
+
 
 };
 

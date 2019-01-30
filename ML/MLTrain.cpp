@@ -12,8 +12,9 @@ MLTrain::MLTrain(QWidget *parent)
 {
 	ui.setupUi(this);
 	setWindowTitle("Train Parameters");
-	ui.lblMssg->hide();
+	ui.wMssg->hide();
 	ui.wPredict->hide();
+	ui.wClamp->hide();
 }
 
 Ui::Dialog MLTrain::getUi() {
@@ -68,8 +69,8 @@ void MLTrain::showLinePlot() {
 		//chart->createDefaultAxes();
 		//chart->setDropShadowEnabled(false);
 		//chart->setTitle("Simple line chart example");
-		QChartView *chartView = new QChartView(chart,ui.wScatter);
-		chartView->resize(ui.wScatter->width(), ui.wScatter->height());
+		this->chartView = new QChartView(chart,ui.wScatter);
+		this->chartView->resize(ui.wScatter->width(), ui.wScatter->height());
 		chartView->setRenderHint(QPainter::Antialiasing);
 		//this->resize(900, 900);
 		//layout->addWidget(chartView, 3, 0);
@@ -104,7 +105,19 @@ void MLTrain::showThetaValues() {
 	}
 	//QMessageBox::warning(this, "eee", QString("%1 %2").arg(lr.data_trans.getMeanC()[0]).arg(lr.data_trans.getMeanC()[1]));
 	ui.lblMssg->setText(QString("Trained successfully!\ncost: %1 \n%2\nR^2 = %3").arg(lr.costValues.back()).arg(str).arg(lr.get_r_squared()));
-	ui.lblMssg->show();
+	ui.wMssg->show();
+}
+
+void MLTrain::train() {
+	this->lr = LR2(this->table, ui.cbResponse->currentText().toStdString());
+	try {
+		lr.train(ui.cbRate->currentText().toDouble(), ui.cbIter->currentText().toInt()); //if train succeed
+		showThetaValues();
+		showLinePlot();
+		showPredict();
+		predVals.clear();
+	}
+	catch (exception e) { ui.lblMssg->setText(QString("Train failed!\nTry lowering the learning rate.")); ui.lblMssg->show(); }
 }
 
 //SIGNALS
@@ -117,6 +130,10 @@ void MLTrain::on_btnPredict_clicked() {
 	}
 	QString response = lr.response_str.c_str();
 	double prediction = lr.predict(vals);
+	if (ui.cbClamp->isChecked()) {
+		prediction = std::min(prediction, ui.cbMax->value());
+		prediction = std::max(prediction, ui.cbMin->value());
+	}
 	ui.lblMssg->setText(QString("%1 = %2").arg(response).arg(prediction));
 }
 
@@ -127,23 +144,26 @@ void MLTrain::on_btnSet_clicked() {
 }
 
 void MLTrain::on_btnOk_clicked() {
-	if (!ui.cbResponse->currentText().isEmpty() && !ui.cbRate->currentText().isEmpty() && !ui.cbIter->currentText().isEmpty()) {
-		//this->accept();
-		this->lr = LR2(this->table, ui.cbResponse->currentText().toStdString());
-		try {
-			lr.train(ui.cbRate->currentText().toDouble(), ui.cbIter->currentText().toInt()); //if train succeed
-			showThetaValues();
-			showLinePlot();
-			showPredict();
-			predVals.clear();
-		}
-		catch (exception e) { ui.lblMssg->setText(QString("Train failed!")); ui.lblMssg->show(); } //if train failed
-	}
-	else
-		return;
+		ui.lblMssg->setText("Building a linear model...");
+		ui.wMssg->show();
+		QMessageBox::warning(this, "Train", QString("Building your model"));
+		train();
 }
 
 void MLTrain::on_btnCancel_clicked() {
 	this->reject();
+}
+
+void MLTrain::on_cbClamp_stateChanged(int state) {
+	if (state) {
+		ui.wScatter->resize(941, 481);
+		this->chartView->resize(ui.wScatter->width(), ui.wScatter->height());
+		ui.wClamp->show();
+	}
+	else {
+		ui.wClamp->hide();
+		ui.wScatter->resize(1151, 481);
+		this->chartView->resize(ui.wScatter->width(), ui.wScatter->height());
+	}
 }
 

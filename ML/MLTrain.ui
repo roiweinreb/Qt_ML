@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1151</width>
-    <height>704</height>
+    <width>1193</width>
+    <height>692</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QWidget" name="wScatter" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>10</x>
      <y>190</y>
-     <width>1051</width>
+     <width>1151</width>
      <height>481</height>
     </rect>
    </property>
@@ -43,7 +43,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>42</y>
+     <y>40</y>
      <width>93</width>
      <height>22</height>
     </rect>
@@ -190,38 +190,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="lblMssg">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>30</y>
-     <width>471</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>11</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-  </widget>
   <widget class="QWidget" name="wPredict" native="true">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>30</y>
+     <x>890</x>
+     <y>10</y>
      <width>271</width>
      <height>161</height>
     </rect>
@@ -249,7 +222,7 @@
       <rect>
        <x>14</x>
        <y>10</y>
-       <width>231</width>
+       <width>218</width>
        <height>51</height>
       </rect>
      </property>
@@ -305,7 +278,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>90</y>
+       <y>100</y>
        <width>188</width>
        <height>28</height>
       </rect>
@@ -327,8 +300,125 @@
       </property>
      </widget>
     </widget>
+    <widget class="QCheckBox" name="cbClamp">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>70</y>
+       <width>151</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Clamp predictions</string>
+     </property>
+    </widget>
    </widget>
   </widget>
+  <widget class="QWidget" name="wMssg" native="true">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>20</y>
+     <width>581</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="lblMssg">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>571</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>11</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="text">
+     <string>Building a linear regression model...</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="wClamp" native="true">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>200</y>
+     <width>191</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>0</y>
+      <width>161</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblClampMin">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Min:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblClampMax">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Max:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="cbMin"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="cbMax"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <zorder>wMssg</zorder>
+  <zorder>wScatter</zorder>
+  <zorder>btnCancel</zorder>
+  <zorder>btnOk</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>wPredict</zorder>
+  <zorder>wClamp</zorder>
  </widget>
  <resources/>
  <connections/>
