@@ -9,6 +9,7 @@ LR2::LR2(Table tab, string response) {
 	cout << ">>> LR2 constructor\n";
 	this->response_str = response;
 	this->response = Matrix(Helper::str2dbl(tab.getColumn(response))); //extract response data 
+	this->response.normalize(0);
 	this->data_trans = Matrix(Helper::str2dbl(tab.remove_column(response).getValues()));
 	this->data = this->data_trans.transpose(); //apply transpose on data matrix
 	this->obs_num = tab.getDimR();
@@ -72,7 +73,7 @@ double LR2::h(vector<double>& x) {
 		throw invalid_argument("Dimensions aren't valid");
 
 	Matrix prediction(x*this->theta.transpose());
-	return prediction.getMat()[0][0];
+	return (prediction.getMat()[0][0] * this->response.getRangeR()[0]) + this->response.getMeanR()[0] ;
 }
 
 double LR2::predict(vector<double>& x) {

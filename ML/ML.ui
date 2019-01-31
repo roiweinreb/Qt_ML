@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>673</height>
+    <width>580</width>
+    <height>617</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,88 +21,19 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>180</y>
-      <width>771</width>
+      <y>110</y>
+      <width>471</width>
       <height>471</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="wChoose" native="true">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>0</y>
-      <width>161</width>
-      <height>66</height>
-     </rect>
-    </property>
-    <widget class="QSplitter" name="splitter_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>148</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <widget class="QLabel" name="lblMerge">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>9</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Choose column to merge:</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="cbCommon">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <item>
-       <property name="text">
-        <string>--Not Selected--</string>
-       </property>
-      </item>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QCheckBox" name="cbxFilter">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>10</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Filter rows
-with null values</string>
     </property>
    </widget>
    <widget class="QWidget" name="wColFilter" native="true">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>10</y>
-      <width>311</width>
-      <height>151</height>
+      <x>890</x>
+      <y>20</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
     </property>
     <widget class="QLabel" name="lblColFil">
@@ -128,41 +59,189 @@ with null values</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="w1" native="true">
+   <widget class="QWidget" name="wTools" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
-      <width>120</width>
-      <height>80</height>
+      <width>471</width>
+      <height>81</height>
      </rect>
     </property>
-    <widget class="QSplitter" name="splitter">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>93</width>
-       <height>56</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <widget class="QPushButton" name="btnData">
-      <property name="text">
-       <string>Import Data</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnTrain">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Train</string>
-      </property>
-     </widget>
-    </widget>
+    <property name="minimumSize">
+     <size>
+      <width>431</width>
+      <height>81</height>
+     </size>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,0,4,0,1,0">
+     <item>
+      <widget class="QWidget" name="w1" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>79</height>
+        </size>
+       </property>
+       <widget class="QSplitter" name="splitter">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>93</width>
+          <height>56</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QPushButton" name="btnData">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Import Data</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnTrain">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Train</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>18</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QWidget" name="wChoose" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>157</width>
+         <height>79</height>
+        </size>
+       </property>
+       <widget class="QSplitter" name="splitter_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>148</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QLabel" name="lblMerge">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choose column to merge:</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="cbCommon">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>--Not Selected--</string>
+          </property>
+         </item>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>18</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="cbxFilter">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>Filter rows
+with null values</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>

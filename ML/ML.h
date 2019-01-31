@@ -33,6 +33,8 @@ public:
 	void disableTable();
 	void enableTable();
 	void enableColFilter();
+	Table concatTables(vector<Table>& tables);
+	void resizeEvent(QResizeEvent* event);
 
 private:
 	Ui::MLClass ui;

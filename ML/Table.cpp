@@ -169,8 +169,8 @@ Table Table::merge_tables_by_col(Table table1, Table table2, string colName) {
 		}
 		else {
 			for (auto idx1 : rowIdx1) { //value appear in both tables
-				vector<string> row1 = table1.getValues()[idx1];
 				for (auto idx2 : rowIdx2) {
+					vector<string> row1 = table1.getValues()[idx1];
 					vector<string> row2 = table2.getValues()[idx2];
 					row2.erase(row2.begin() + colIdx2);
 					row1.insert(row1.end(), row2.begin(), row2.end());
